@@ -4,8 +4,7 @@ export const taskS = atom([
  {
   id: 1,
   group: -1,
-  text:
-   "Do Homework sadasbjdasmd ss dasd sa da sda sd asd asd as da sda sd asd asd as dsa da sd ",
+  text: "Do Homework, then sleeep early.",
   done: 0,
   color: "#32292F",
  },
