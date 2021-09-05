@@ -28,7 +28,7 @@ export default function App() {
     <title>Highlights</title>{" "}
    </Head>
 
-   <div className="container mx-auto text-4xl text-center my-20 ring-2 font-semibold ring-black p-10 font-mono hover:bg-gray-300 transition duration-300 w-2/3 bg-white shadow-xl">
+   <div className="container mx-auto md:text-4xl text-2xl text-center my-20 ring-2 font-semibold ring-black p-10 font-mono hover:bg-gray-300 transition duration-300 w-2/3 bg-white shadow-xl">
     Highlights
    </div>
    <div>
@@ -60,7 +60,7 @@ export default function App() {
        key={++c}
        className="bg-gray-200 p-10 m-10 rounded-lg xl:w-2/3 w-11/12 mx-auto relative  shadow-xl ring-1 ring-indigo-300"
       >
-       <div className="bg-black text-white hover:bg-white hover:text-red-400 md:text-lg text-sm absolute top-4 right-4 font-semibold p-3 rounded-md active:bg-gray-200">
+       <div className="bg-black text-white hover:bg-white hover:text-red-400 md:text-lg text-sm absolute top-4 right-4 font-semibold md:p-3 p-2 rounded-md active:bg-gray-200">
         <button
          onClick={() => {
           removeAGroup(curr.groupid);
@@ -70,7 +70,7 @@ export default function App() {
         </button>
        </div>
 
-       <div className="mx-auto my-5 text-center md:text-3xl font-sans font-semibold bg-white w-1/3 p-2 ring-2 ring-black text-lg cursor-pointer">
+       <div className="mx-auto md:my-5 mt-8 text-center md:text-3xl font-sans font-semibold bg-white md:w-1/3 p-2 ring-2 ring-black text-lg cursor-pointer w-2/3">
         {curr.name}
        </div>
        <div className="mx-auto my-2 text-center text-xl font-sans container center flex flex-row justify-evenly w-4/5 flex-wrap">
