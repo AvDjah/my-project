@@ -1,4 +1,4 @@
-import {taskS, groups, counts} from "../jotai/atoms";
+import {taskS, groups, taskId, groupId} from "../jotai/atoms";
 import {useAtom} from "jotai";
 import {
  Modal,
@@ -17,10 +17,15 @@ import {Menu, MenuButton, MenuList, MenuItem} from "@chakra-ui/react";
 import randomColor from "randomcolor";
 
 let count = 10;
+function idProvider() {
+ count = count + 1;
+ return count;
+}
 
 export default function Toolbar(options) {
  const [tasks, setTasks] = useAtom(taskS);
- const [counter, setCounts] = useAtom(counts);
+ const [taskIDs, setTaskIDs] = useAtom(taskId);
+ const [groupIDs, setgroupIDs] = useAtom(groupId);
  const [selectedGroup, setSelectedGroup] = useState(-1);
  const [groupname, setgroupname] = useState("");
  const [groupitems, setGroups] = useAtom(groups);
@@ -45,27 +50,33 @@ export default function Toolbar(options) {
 
  const onAddTaskHandle = (group, name) => {
   if (name != "") {
-   let a = counter.groups;
-   let b = counter.tasks;
-   setCounts({group: a, tasks: b + 1});
-   console.log(counter.tasks);
+   console.log("before tid: ", taskIDs);
+   setTaskIDs(taskIDs + 1);
+   console.log("after tids: ", taskIDs);
+   //  setCounts({group: a, tasks: b + 1});
+
    let newcolor = randomColor({luminosity: "dark"});
    console.log("color: ", newcolor);
    setTasks([
     ...tasks,
-    {id: counter.tasks, group: group, text: name, done: 0, color: newcolor},
+    {id: idProvider(), group: group, text: name, done: 0, color: newcolor},
    ]);
   }
+  console.log("Tasks: ", tasks);
   setValue("");
   onClose();
  };
 
  const onAddGroupHandler = (name) => {
   if (name != "") {
-   let a = counter.groups;
-   let b = counter.tasks;
-   setCounts({group: a + 1, tasks: b});
-   setGroups([...groupitems, {groupid: counter.groups, name: name}]);
+   //  let a = counter.groups;
+   //  let b = counter.tasks;
+   console.log("before gids: ", groupIDs);
+   setgroupIDs(groupIDs + 1);
+   console.log("after gids: ", groupIDs);
+   //  setCounts({group: a + 1, tasks: b});
+   setGroups([...groupitems, {groupid: idProvider(), name: name}]);
+   console.log("Groups: ", groupitems);
   }
   setValue2("");
   onClose();
@@ -162,7 +173,6 @@ export default function Toolbar(options) {
           ></Input>
          </div>
         )}
-        {console.log(adder)}
        </ModalBody>
 
        <ModalFooter>

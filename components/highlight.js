@@ -16,6 +16,8 @@ import {
  Textarea,
 } from "@chakra-ui/react";
 import ReactToolTip from "react-tooltip";
+import Tooltip from "@material-ui/core/Tooltip";
+import {withStyles, makeStyles} from "@material-ui/core/styles";
 
 export default function Highlight(props) {
  const [tasks, setTasks] = useAtom(taskS);
@@ -75,8 +77,19 @@ export default function Highlight(props) {
  const btn =
   "transition duration-300 bg-gray-600 px-2 font-bold py-1 rounded-lg m-2 active:bg-white active:text-black";
 
+ const HtmlTooltip = withStyles((theme) => ({
+  tooltip: {
+   backgroundColor: "#f5f5f9",
+   color: "rgba(0, 0, 0, 0.87)",
+   maxWidth: 220,
+   fontSize: theme.typography.pxToRem(16),
+   border: "1px solid #dadde9",
+  },
+ }))(Tooltip);
+
  return (
   <div
+   key={props.keyd}
    style={{backgroundColor: props.color}}
    className="rounded-lg text-lg text-white p-8  font-semibold text-center flex place-content-between flex-col h-72  flex-wrap m-4 flex-none w-64 items-between relative"
   >
@@ -156,14 +169,13 @@ export default function Highlight(props) {
      </button>
     )}
    </div>
-   <div className="overflow-hidden h-3/4 cursor-pointer">
-    <a data-tip={props.text}>{props.text}</a>
-    <ReactToolTip
-     place="bottom"
-     effect="solid"
-     type="info"
-     multiline={true}
-    ></ReactToolTip>
+   <div className="overflow-hidden max-h-3/4 h-3/4 w-full cursor-pointer">
+    <div>
+     <HtmlTooltip arrow title={props.text}>
+      <p>{props.text}</p>
+     </HtmlTooltip>
+     {/* <p data-tip={props.text}>{props.text}</p> */}
+    </div>
    </div>
    <div className="flex flex-row justify-evenly bg-gray-600 rounded-lg ring-2 text-black ring-white w-full">
     <Menu>
@@ -205,6 +217,7 @@ export default function Highlight(props) {
       {groupitems.map((gr) => {
        return (
         <MenuItem
+         key={gr.groupid}
          onClick={() => {
           selectorGroup(props.id, gr.groupid);
          }}

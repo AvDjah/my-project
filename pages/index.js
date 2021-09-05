@@ -57,7 +57,7 @@ export default function App() {
     {grouplist.map((curr) => {
      return (
       <div
-       key={++c}
+       key={curr.groupid}
        className="bg-gray-200 p-10 m-10 rounded-lg xl:w-2/3 w-11/12 mx-auto relative  shadow-xl ring-1 ring-indigo-300"
       >
        <div className="bg-black text-white hover:bg-white hover:text-red-400 md:text-lg text-sm absolute top-4 right-4 font-semibold md:p-3 p-2 rounded-md active:bg-gray-200">
@@ -79,8 +79,9 @@ export default function App() {
          : tasks.map((task) => {
             if (task.group == curr.groupid) {
              return (
-              <div>
+              <div key={task.id}>
                <Highlight
+                keyd={task.id}
                 done={task.done}
                 id={task.id}
                 text={task.text}

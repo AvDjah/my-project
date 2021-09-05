@@ -11,7 +11,8 @@ export const taskS = atom([
  {group: 1, text: "Finish Homework", id: 2, done: 1, color: "#1C3A13"},
 ]);
 
-export const counts = atom({tasks: 3, groups: 3});
+export const taskId = atom(3);
+export const groupId = atom(3);
 
 export const groups = atom([
  {groupid: 1, name: "College Work"},
