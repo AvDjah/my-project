@@ -112,7 +112,7 @@ export default function Highlight(props) {
     </Modal>
    </>
    <div className="absolute -right-6 -top-6 text-black">
-    {props.done === 0 ? (
+    {props.done === 1 ? (
      <button
       onClick={() => {
        changeDoneStatus(props.id);
