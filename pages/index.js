@@ -25,18 +25,9 @@ export default function App() {
  return (
   <div>
    <Head>
-    <title>Highlights</title>
+    <title>Highlights</title>{" "}
    </Head>
-   <style jsx global>{`
-    body {
-     background-color: #e5e5f7;
-     opacity: 1;
-     background-image: radial-gradient(#444cf7 1.05px, transparent 1.05px),
-      radial-gradient(#444cf7 1.05px, #e5e5f7 1.05px);
-     background-size: 42px 42px;
-     background-position: 0 0, 21px 21px;
-    }
-   `}</style>
+
    <div className="container mx-auto text-4xl text-center my-20 ring-2 font-semibold ring-black p-10 font-mono hover:bg-gray-300 transition duration-300 w-2/3 bg-white shadow-xl">
     Highlights
    </div>
