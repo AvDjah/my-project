@@ -2,6 +2,7 @@ import Toolbar from "../components/toolbar";
 import Highlight from "../components/highlight";
 import {useAtom} from "jotai";
 import {taskS, groups} from "../jotai/atoms";
+import Head from "next/head";
 
 export default function App() {
  const [tasks, setTasks] = useAtom(taskS);
@@ -23,14 +24,27 @@ export default function App() {
  let c = 0;
  return (
   <div>
-   <div className="container mx-auto text-4xl text-center my-20 ring-2 font-semibold ring-black p-10 font-mono hover:bg-gray-300 transition duration-300">
-    Highlight Management
+   <Head>
+    <title>Highlights</title>
+   </Head>
+   <style jsx global>{`
+    body {
+     background-color: #e5e5f7;
+     opacity: 1;
+     background-image: radial-gradient(#444cf7 1.05px, transparent 1.05px),
+      radial-gradient(#444cf7 1.05px, #e5e5f7 1.05px);
+     background-size: 42px 42px;
+     background-position: 0 0, 21px 21px;
+    }
+   `}</style>
+   <div className="container mx-auto text-4xl text-center my-20 ring-2 font-semibold ring-black p-10 font-mono hover:bg-gray-300 transition duration-300 w-2/3 bg-white shadow-xl">
+    Highlights
    </div>
    <div>
     <Toolbar></Toolbar>
    </div>
-   <div className="mx-auto my-10 text-center text-3xl font-sans font-semibold ">
-    Single Tasks
+   <div className="mx-auto my-5 text-center md:text-3xl font-sans font-semibold bg-white w-1/3 p-2 ring-2 ring-black text-lg cursor-pointer">
+    Ungrouped Tasks
    </div>
    <div className="container mx-auto my-10 center flex flex-row justify-evenly w-4/5 flex-wrap">
     {tasks.map((task) => {
@@ -53,9 +67,9 @@ export default function App() {
      return (
       <div
        key={++c}
-       className="bg-gray-200 p-10 m-10 rounded-lg xl:w-2/3 w-11/12 mx-auto relative"
+       className="bg-gray-200 p-10 m-10 rounded-lg xl:w-2/3 w-11/12 mx-auto relative  shadow-xl ring-1 ring-indigo-300"
       >
-       <div className="bg-black text-white hover:bg-white hover:text-red-400 text-lg absolute top-4 right-4 font-semibold p-3 rounded-md active:bg-gray-200">
+       <div className="bg-black text-white hover:bg-white hover:text-red-400 md:text-lg text-sm absolute top-4 right-4 font-semibold p-3 rounded-md active:bg-gray-200">
         <button
          onClick={() => {
           removeAGroup(curr.groupid);
@@ -65,7 +79,7 @@ export default function App() {
         </button>
        </div>
 
-       <div className="mx-auto my-5 text-center md:text-3xl font-sans font-semibold bg-white w-1/3 p-2 ring-2 ring-black text-lg ">
+       <div className="mx-auto my-5 text-center md:text-3xl font-sans font-semibold bg-white w-1/3 p-2 ring-2 ring-black text-lg cursor-pointer">
         {curr.name}
        </div>
        <div className="mx-auto my-2 text-center text-xl font-sans container center flex flex-row justify-evenly w-4/5 flex-wrap">

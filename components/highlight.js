@@ -156,7 +156,7 @@ export default function Highlight(props) {
      </button>
     )}
    </div>
-   <div className="overflow-hidden h-3/4">
+   <div className="overflow-hidden h-3/4 cursor-pointer">
     <a data-tip={props.text}>{props.text}</a>
     <ReactToolTip
      place="bottom"
