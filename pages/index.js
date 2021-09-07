@@ -90,12 +90,12 @@ export default function App(props) {
 
  const countUngroupTasks = () => {
   let c = 0;
-  console.log(tasks);
-  //   tasks.map((task) => {
-  //    if (task.group === -1) c++;
-  //   });
-  //   console.log("c: ", c);
-  return 1;
+  //   console.log(tasks);
+  tasks.map((task) => {
+   if (task.group === -1) c++;
+  });
+  // console.log("c: ", c);
+  return c;
  };
 
  return (
