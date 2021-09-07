@@ -27,31 +27,19 @@ export default function Highlight(props) {
  const {isOpen, onOpen, onClose} = useDisclosure();
 
  const changeDoneStatus = (id) => {
-  setTasks(
-   tasks.map((task) => {
-    if (task.id === id) {
-     if (task.done === 0) {
-      //   console.log("task: ", task.id, " prev: ", task.done);
-      task.done = 1;
-      //   console.log("after: ", task.done);
-     } else task.done = 0;
-    }
-    return task;
-   })
-  );
-  //   console.log("reverse done");
-  localStorage.setItem(
-   "htasks",
-   JSON.stringify(
-    tasks.map((task) => {
-     if (task.id === id) {
-      if (task.done === 0) task.done = 1;
-      else task.done = 0;
-     }
-     return task;
-    })
-   )
-  );
+  let temp = tasks.map((task) => {
+   if (task.id === id) {
+    if (task.done === 0) {
+     //   console.log("task: ", task.id, " prev: ", task.done);
+     task.done = 1;
+     //   console.log("after: ", task.done);
+    } else task.done = 0;
+   }
+   return task;
+  });
+
+  setTasks(temp);
+  localStorage.setItem("htasks", JSON.stringify(temp));
  };
 
  const handleChange = (event) => setValue(event.target.value);

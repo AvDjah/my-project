@@ -24,26 +24,26 @@ export default function App(props) {
   );
  };
 
- //  useEffect(() => {
- //   let x = localStorage.getItem("htasks");
- //   let y = localStorage.getItem("hgroups");
- //   let c = localStorage.getItem("hids");
- //   console.log(y);
- //   console.log(x);
- //   console.log(c);
- //   let prevgroups = JSON.parse(y);
- //   let prevtasks = JSON.parse(x);
- //   let ct = parseInt(c);
- //   console.log(prevgroups, prevtasks, ct);
- //   if (prevgroups !== null) setGroups(prevgroups);
- //   else localStorage.setItem("hgroups", JSON.stringify(grouplist));
- //   if (prevtasks !== null) setTasks(prevtasks);
- //   else localStorage.setItem("htasks", JSON.stringify(tasks));
- //   if (ct !== null) setID(ct);
- //   else localStorage.setItem("hids", getID);
- //   //    console.log("prev: ", prevgroups, prevtasks);
- //   //    console.log("x: ", ct);
- //  }, []);
+ useEffect(() => {
+  let x = localStorage.getItem("htasks");
+  let y = localStorage.getItem("hgroups");
+  let c = localStorage.getItem("hids");
+  console.log(y);
+  console.log(x);
+  console.log(c);
+  let prevgroups = JSON.parse(y);
+  let prevtasks = JSON.parse(x);
+  let ct = parseInt(c);
+  console.log(prevgroups, prevtasks, ct);
+  if (prevgroups !== null) setGroups(prevgroups);
+  else localStorage.setItem("hgroups", JSON.stringify(grouplist));
+  if (prevtasks !== null) setTasks(prevtasks);
+  else localStorage.setItem("htasks", JSON.stringify(tasks));
+  if (ct !== null) setID(ct);
+  else localStorage.setItem("hids", getID);
+  //    console.log("prev: ", prevgroups, prevtasks);
+  //    console.log("x: ", ct);
+ }, []);
 
  const CountSubtasks = (id) => {
   let count = 0;
