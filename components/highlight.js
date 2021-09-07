@@ -30,11 +30,27 @@ export default function Highlight(props) {
   setTasks(
    tasks.map((task) => {
     if (task.id === id) {
-     if (task.done === 0) task.done = 1;
-     else task.done = 0;
+     if (task.done === 0) {
+      //   console.log("task: ", task.id, " prev: ", task.done);
+      task.done = 1;
+      //   console.log("after: ", task.done);
+     } else task.done = 0;
     }
     return task;
    })
+  );
+  //   console.log("reverse done");
+  localStorage.setItem(
+   "htasks",
+   JSON.stringify(
+    tasks.map((task) => {
+     if (task.id === id) {
+      if (task.done === 0) task.done = 1;
+      else task.done = 0;
+     }
+     return task;
+    })
+   )
   );
  };
 
@@ -49,6 +65,17 @@ export default function Highlight(props) {
     return task;
    })
   );
+  localStorage.setItem(
+   "htasks",
+   JSON.stringify(
+    tasks.filter((task) => {
+     if (task.id === id) {
+      task.text = value;
+     }
+     return task;
+    })
+   )
+  );
  };
 
  const removeTask = (id) => {
@@ -57,6 +84,7 @@ export default function Highlight(props) {
   //   _.remove(temp, {id: id});
   console.log(temp);
   setTasks(temp);
+  localStorage.setItem("htasks", JSON.stringify(temp));
  };
 
  const selectorGroup = (taskid, groupid) => {
@@ -68,6 +96,17 @@ export default function Highlight(props) {
     }
     return task;
    })
+  );
+  localStorage.setItem(
+   "htasks",
+   JSON.stringify(
+    tasks.map((task) => {
+     if (task.id === taskid) {
+      task.group = groupid;
+     }
+     return task;
+    })
+   )
   );
   console.log(selectedGroup);
  };
@@ -87,8 +126,19 @@ export default function Highlight(props) {
   },
  }))(Tooltip);
 
+ const handleDragStart = (e) => {
+  e.dataTransfer.setData("taskid", props.id);
+ };
+ const handleDrag = (e) => {
+  e.preventDefault();
+  //   console.log("dragging: ", props.id);
+ };
+
  return (
   <div
+   draggable
+   onDragStart={handleDragStart}
+   onDrag={handleDrag}
    key={props.keyd}
    style={{backgroundColor: props.color}}
    className="rounded-lg text-lg text-white p-8  font-semibold text-center flex place-content-between flex-col h-72  flex-wrap m-4 flex-none w-64 items-between relative"
@@ -124,7 +174,7 @@ export default function Highlight(props) {
      </ModalContent>
     </Modal>
    </>
-   <div className="absolute -right-6 -top-6 text-black">
+   <div className="absolute -right-6 -top-6 text-black z-10">
     {props.done === 1 ? (
      <button
       onClick={() => {
@@ -209,6 +259,17 @@ export default function Highlight(props) {
           }
           return task;
          })
+        );
+        localStorage.setItem(
+         "htasks",
+         JSON.stringify(
+          tasks.map((task) => {
+           if (task.id === props.id) {
+            task.group = -1;
+           }
+           return task;
+          })
+         )
         );
        }}
       >

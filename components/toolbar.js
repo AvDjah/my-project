@@ -1,4 +1,4 @@
-import {taskS, groups, taskId, groupId} from "../jotai/atoms";
+import {taskS, groups, taskId, groupId, idProvide} from "../jotai/atoms";
 import {useAtom} from "jotai";
 import {
  Modal,
@@ -33,6 +33,7 @@ export default function Toolbar(options) {
  const [adder, setadder] = useState("task");
  const [value, setValue] = useState("");
  const handleChange = (event) => setValue(event.target.value);
+ const [getID, setID] = useAtom(idProvide);
 
  const [value2, setValue2] = useState("");
  const handleChange2 = (event) => setValue2(event.target.value);
@@ -50,18 +51,24 @@ export default function Toolbar(options) {
 
  const onAddTaskHandle = (group, name) => {
   if (name != "") {
-   console.log("before tid: ", taskIDs);
-   setTaskIDs(taskIDs + 1);
-   console.log("after tids: ", taskIDs);
-   //  setCounts({group: a, tasks: b + 1});
-
    let newcolor = randomColor({luminosity: "dark"});
+   let newid = getID;
+   setID(getID + 1);
    console.log("color: ", newcolor);
    setTasks([
     ...tasks,
-    {id: idProvider(), group: group, text: name, done: 0, color: newcolor},
+    {id: newid, group: group, text: name, done: 0, color: newcolor},
    ]);
+   localStorage.setItem(
+    "htasks",
+    JSON.stringify([
+     ...tasks,
+     {id: newid, group: group, text: name, done: 0, color: newcolor},
+    ])
+   );
+   localStorage.setItem("hids", getID + 1);
   }
+
   console.log("Tasks: ", tasks);
   setValue("");
   onClose();
@@ -69,16 +76,18 @@ export default function Toolbar(options) {
 
  const onAddGroupHandler = (name) => {
   if (name != "") {
-   //  let a = counter.groups;
-   //  let b = counter.tasks;
-   console.log("before gids: ", groupIDs);
-   setgroupIDs(groupIDs + 1);
-   console.log("after gids: ", groupIDs);
-   //  setCounts({group: a + 1, tasks: b});
-   setGroups([...groupitems, {groupid: idProvider(), name: name}]);
+   let newid = getID;
+   setID(getID + 1);
+   setGroups([...groupitems, {groupid: newid, name: name}]);
    console.log("Groups: ", groupitems);
+   localStorage.setItem(
+    "hgroups",
+    JSON.stringify([...groupitems, {groupid: newid, name: name}])
+   );
+   localStorage.setItem("hids", getID + 1);
   }
   setValue2("");
+
   onClose();
  };
 
@@ -99,6 +108,7 @@ export default function Toolbar(options) {
      {groupitems.map((gr) => {
       return (
        <MenuItem
+        key={gr.groupid}
         onClick={() => {
          selectorGroup(gr.groupid, gr.name);
         }}
@@ -145,9 +155,7 @@ export default function Toolbar(options) {
      <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
       <ModalContent>
-       <ModalHeader>
-        {adder == "tasks" ? "Add Highlight" : "Add Bucket"}
-       </ModalHeader>
+       <ModalHeader>{adder === "tasks" ? "Add" : "Add"}</ModalHeader>
        <ModalCloseButton />
        <ModalBody>
         {adder == "task" ? (

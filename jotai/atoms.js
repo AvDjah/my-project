@@ -11,6 +11,8 @@ export const taskS = atom([
  {group: 1, text: "Finish Homework", id: 2, done: 1, color: "#1C3A13"},
 ]);
 
+export const idProvide = atom(10);
+
 export const taskId = atom(3);
 export const groupId = atom(3);
 
