@@ -10,6 +10,7 @@ export default function App(props) {
  const [grouplist, setGroups] = useAtom(groups);
  const [getID, setID] = useAtom(idProvide);
  const [value, setValue] = useState("");
+ const [sortOrder, setSortOrder] = useState("A");
 
  const removeAGroup = (groupid) => {
   setTasks(tasks.filter((task) => task.group !== groupid));
@@ -243,6 +244,26 @@ export default function App(props) {
      className=" bg-black p-4 rounded-lg text-white font-semibold text-center hover:bg-white hover:text-red-600 active:bg-gray-300"
     >
      Set Default Local
+    </button>
+   </div>
+   <div className="center mx-auto text-lg text-center m-4">
+    <button
+     onClick={() => {
+      let temp = tasks.sort((a, b) => {
+       if (sortOrder === "A") {
+        setSortOrder("D");
+        return a.done - b.done;
+       } else if (sortOrder === "D") {
+        setSortOrder("A");
+        return b.done - a.done;
+       }
+      });
+      setTasks(temp);
+      console.log(temp);
+     }}
+     className="bg-black p-4 rounded-lg text-white font-semibold text-center hover:bg-white hover:text-red-600 active:bg-gray-300"
+    >
+     Sort Data
     </button>
    </div>
    <div className="text-right m-10">Created with ❤️ by Arvind Meena</div>
