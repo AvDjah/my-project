@@ -172,11 +172,11 @@ export default function App(props) {
           removeAGroup(curr.groupid);
          }}
         >
-         Remove Group
+         Remove
         </button>
        </div>
 
-       <div className="mx-auto md:my-5 mt-8 text-center xl:text-2xl font-sans font-semibold bg-white md:w-1/3 p-2 ring-2 ring-black text-md cursor-pointer w-2/3">
+       <div className="mx-auto md:my-5 mt-8 text-center xl:text-2xl font-sans font-semibold bg-white md:w-2/5 p-2 ring-2 ring-black text-md cursor-pointer w-2/3">
         {curr.name}
        </div>
        <div className="mx-auto my-2 text-center text-xl font-sans container center flex flex-row justify-evenly w-4/5 flex-wrap">
