@@ -98,6 +98,14 @@ export default function App(props) {
   // console.log("c: ", c);
   return c;
  };
+ const totalgroups = () => {
+  let count = 0;
+  grouplist.map((group) => {
+   count++;
+   return group;
+  });
+  return count;
+ };
 
  return (
   <div>
@@ -118,6 +126,7 @@ export default function App(props) {
    <div
     onDragOver={(e) => {
      e.preventDefault();
+
      //  console.log("in group: ", -1);
      //  console.log(e);
      // e.target.style.border = "3px solid red";
@@ -144,7 +153,15 @@ export default function App(props) {
      })
     )}
    </div>
-   <div className="grid md:grid-cols-2 lg:grid-cols-3 grid-cols-1 grid-auto-row">
+   <div
+    className={`grid md:grid-cols-2 ${
+     totalgroups() === 1
+      ? "lg:grid-cols-1"
+      : totalgroups() === 2
+      ? "lg:grid-cols-2"
+      : "lg:grid-cols-3"
+    } grid-cols-1 grid-auto-row`}
+   >
     {grouplist.map((curr) => {
      let x = CountSubtasks(curr.groupid);
      console.log("g: ", curr.groupid, " x: ", x);
