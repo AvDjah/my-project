@@ -144,10 +144,15 @@ export default function App(props) {
      })
     )}
    </div>
-   <div className="flex lg:flex-row flex-col justify-center flex-wrap">
+   <div className="grid md:grid-cols-2 lg:grid-cols-3 grid-cols-1 grid-auto-row">
     {grouplist.map((curr) => {
+     let x = CountSubtasks(curr.groupid);
+     console.log("g: ", curr.groupid, " x: ", x);
+     let span = "span " + (x + 1);
+
      return (
       <div
+       style={{gridRow: span}}
        onDragOver={(e) => {
         e.preventDefault();
         // console.log("in group: ", curr.name);
@@ -159,7 +164,7 @@ export default function App(props) {
        }}
        onDrop={(e) => handleDrop(e, curr.groupid)}
        key={curr.groupid}
-       className="bg-gray-200 p-10 mx-auto rounded-lg xl:w-2/3 md:mx-5 relative  shadow-xl ring-1 ring-indigo-300  my-5 lg:max-w-md w-11/12 center min-w-1/2"
+       className="bg-gray-200 p-10 mx-auto rounded-lg w-11/12 relative m-4 shadow-xl ring-1 ring-indigo-300"
       >
        <div className="bg-black text-white hover:bg-white hover:text-red-400 xl:text-lg text-sm absolute top-4 right-4 font-semibold md:p-3 p-2 rounded-md active:bg-gray-200">
         <button
